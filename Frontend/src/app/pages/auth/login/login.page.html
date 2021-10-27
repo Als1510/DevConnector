@@ -1,0 +1,50 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content>
+  <div class="background-pic">
+    <div class="background-filter">
+      <div class="shape1">
+      </div>
+      <div class="shape2">
+      </div>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Welcome!</ion-card-title>
+
+          <ion-card-subtitle>Time to Explore, Let's <a routerLink="/login">Sign in</a></ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div *ngIf="loading" class="spinner">
+            <img src="../../../../assets/output-onlinegiftools.gif">
+          </div>
+          
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <ion-item>
+              <ion-input placeholder="Email Address" name="email" type="email" formControlName="email"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+              <ion-input placeholder="Password" type="{{ hide ? 'text' : 'password' }}" name="password"  formControlName="password"></ion-input>
+              <ion-icon *ngIf="hide" title="Show" name="eye-outline" (click)="eye()"></ion-icon>
+              <ion-icon *ngIf="!hide" name="eye-off-outline" (click)="eye()"></ion-icon>
+            </ion-item>
+            
+            <a routerLink="/forgetpassword">Forget Password</a>
+            
+            <div class="bottom-section">
+              <ion-button type="submit">Sign In</ion-button>
+              <span>
+                Dont't have an account ? <a routerLink="/register">Sign Up</a>
+              </span>
+            </div>
+          </form>
+
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

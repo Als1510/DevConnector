@@ -1,0 +1,83 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  
+  h1{
+    font-size: 10rem;
+    background: url('../../../../assets/400-page-background.jpg') repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    font-weight: 1000;
+  }
+  
+  .content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    h2{
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    
+    p{
+      font-size: 1rem;
+      width: 70%;
+      text-align: center;
+    }
+    
+    ion-button{
+      margin-top: 1rem;
+      --ion-color: #012a4a;
+      border-radius: 1.5rem;
+
+      a{
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@media(max-width: 768px) {
+  .container {
+    h1{
+      font-size: 8rem;
+    }
+    
+    .content{
+      h2{
+        font-size: 2rem;
+      }
+      
+      p{
+        font-size: 1rem;
+      }
+    } 
+  }
+}
+
+@media(max-width: 480px) {
+  .container {
+    h1{
+      font-size: 6rem;
+    }
+    
+    .content{
+      h2{
+        font-size: 1.5rem;
+      }
+      
+      p{
+        font-size: 0.8rem;
+        width: 80%;
+      }
+    } 
+  }
+}

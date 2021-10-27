@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "DevConnector",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

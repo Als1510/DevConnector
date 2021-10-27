@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="posts" text="Back"
+      icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="loading" *ngIf="loading">
+    <img src="../../../../assets/output-onlinegiftools.gif">
+  </div>
+  <div class="container" *ngIf="!loading">
+    <div class="section">
+      <header class="cards">
+        <ion-card>
+          <ion-card-content>
+            <div class="user">
+              <img [src]="post.avatar">
+              <h1>{{post.name}}</h1>
+            </div>
+            <div class="comment">
+              <h4>{{post.text}}</h4>
+              <p>Posted on {{post.date}}</p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+        <h3>Say Something....</h3>
+        <ion-item [formGroup]="postForm">
+          <ion-textarea placeholder="Comment on this post" name="text" formControlName="text"></ion-textarea>
+        </ion-item>
+        <ion-button (click)="onSubmit()">Submit</ion-button>
+      </header>
+
+      <section class="cards">
+        <ion-card *ngFor="let comment of post.comments">
+          <ion-card-content>
+            <div class="user">
+              <img [src]="comment.avatar">
+              <h1>{{comment.name}}</h1>
+            </div>
+            <div class="comment">
+              <h4>{{comment.text}}</h4>
+              <p>Posted on {{comment.date}}</p>
+            </div>
+            <ion-button *ngIf="user_id === comment.user" (click)="deleteComment(comment._id)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+          </ion-card-content>
+        </ion-card>        
+      </section>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content>
+  <div class="background-pic">
+    <div class="background-filter">
+      <div class="shape1">
+      </div>
+      <div class="shape2">
+      </div>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Sign Up!</ion-card-title>
+
+          <ion-card-subtitle>Create you <strong> account </strong> by filling up the form</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div *ngIf="loading" class="spinner">
+            <img src="../../../../assets/output-onlinegiftools.gif">
+          </div>
+
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <ion-item>
+              <ion-input placeholder="Full Name" type="text" name="name"  formControlName="name"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+              <ion-input placeholder="Email" type="email" name="email" formControlName="email"></ion-input>
+            </ion-item>
+      
+            <ion-item>
+              <ion-input placeholder="Password" type="{{ hide ? 'text' : 'password' }}" name="password"  formControlName="password"></ion-input>
+              <ion-icon *ngIf="hide" title="Show" name="eye-outline" (click)="eye()"></ion-icon>
+              <ion-icon *ngIf="!hide" name="eye-off-outline" (click)="eye()"></ion-icon>
+            </ion-item>
+            
+            <div class="bottom-section">
+              <ion-button type="submit">Sign Up</ion-button>
+              <span>
+                Already have an account ? <a routerLink="/login">Sign In</a>
+              </span>
+            </div>
+          </form>
+
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Developer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="loading" *ngIf="loading">
+    <img src="../../../../assets/output-onlinegiftools.gif">
+  </div>
+  <div class="container" *ngIf="!loading">
+    <div class="section">
+      <header>
+        <ion-icon name="globe-outline"></ion-icon>
+        <h1>Browse & connect with developers</h1>
+      </header>
+      <ion-card *ngFor="let profile of profiles">
+        <ion-card-content>
+          <section id="image">
+            <img [src]="profile.user.avatar" alt="">
+            <ion-button (click)="openProfile(profile.user._id)">View Profile</ion-button>
+          </section>
+          <section id="details">
+            <div id="info">
+              <h1>{{profile.user.name}}</h1>
+              <p>{{profile.status}}</p>
+            </div>
+            <div id="skills">
+              <div id="skill" *ngFor="let skill of profile.skills">
+                <ion-icon name="ribbon-outline"></ion-icon>
+                <p>{{skill}}</p>
+              </div>
+            </div>
+          </section>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

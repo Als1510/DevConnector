@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="dashboard" text="Back"
+      icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="loading" *ngIf="loading">
+    <img src="../../../../assets/output-onlinegiftools.gif">
+  </div>
+  <div class="container">
+    <div class="section" [formGroup]="experienceForm">
+      <header>
+        <h1>Add An Experience</h1>
+        <p><ion-icon name="git-branch-outline"></ion-icon>Add any developer/programming positions that you have had in the past</p>
+      </header>
+
+      <section id="experience-section">
+        <ion-item>
+          <ion-label position="floating">Job Title</ion-label>
+          <ion-input type="text"name="title" formControlName="title"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Company</ion-label>
+          <ion-input type="text" name="company" formControlName="company"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Location</ion-label>
+          <ion-input type="text" name="location" formControlName="location"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">From Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" name="from" formControlName="from"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label id="checkbox-label">Current</ion-label>
+          <ion-checkbox (click)="checked()"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">To Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" name="to" formControlName="to" max="2100"></ion-datetime>
+        </ion-item>
+      </section>
+      <ion-item>
+        <ion-label position="floating">Job Description</ion-label>
+        <ion-textarea type="text" name="description" formControlName="description"></ion-textarea>
+      </ion-item>
+
+      <section id="submit">
+        <ion-button (click)="onSubmit()">Submit</ion-button>
+      </section>
+    </div>
+  </div>
+</ion-content>
+

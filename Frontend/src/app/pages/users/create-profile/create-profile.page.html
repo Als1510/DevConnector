@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="dashboard" text="Back"
+      icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="loading" *ngIf="!dataLoaded">
+    <img src="../../../../assets/output-onlinegiftools.gif">
+  </div>
+  <div class="container">
+    <div class="section" [formGroup]="profileForm">
+      <header>
+        <h1>Create/Edit Your Profile</h1>
+        <p><ion-icon name="person"></ion-icon>Let's get some information to make your profile stand out</p>
+      </header>
+
+      <section id="profile-section">
+        <ion-item>
+          <ion-label position="stacked">Give us an idea of where you are at in your career</ion-label>
+          <ion-select placeholder="Select Professional Status" name="status" formControlName="status">
+            <ion-select-option value="Developer">Developer</ion-select-option>
+            <ion-select-option value="Junior Developer">Junior Developer</ion-select-option>
+            <ion-select-option value="Senior Developer">Senior Developer</ion-select-option>
+            <ion-select-option value="Manager">Manager</ion-select-option>
+            <ion-select-option value="Student or Learning">Student or Learning</ion-select-option>
+            <ion-select-option value='Instructor or Teacher'>Instructor or Teacher</ion-select-option>
+            <ion-select-option value="Intern">Intern</ion-select-option>
+            <ion-select-option value="Other">Other</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Could be your own company or one you work for</ion-label>
+          <ion-input type="text" placeholder="Company" name="company" formControlName="company"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Could be your own or a company website</ion-label>
+          <ion-input type="text" placeholder="Website" name="website" formControlName="website"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">City & state (eg. Indore, Madhya Pradesh)</ion-label>
+          <ion-input type="text" placeholder="Location" name="location" formControlName="location"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Use comma separated values (eg. HTML,CSS,JavaScript,PHP)</ion-label>
+          <ion-input type="text" placeholder="Skills" name="skills" formControlName="skills"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">If you want your latest repos and a Github link, include your username</ion-label>
+          <ion-input type="text" placeholder="Github Username" name="githubusername" formControlName="githubusername"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked" >Tell us a little about yourself</ion-label>
+          <ion-textarea type="text" placeholder="A short bio of yourself" name="bio" formControlName="bio"></ion-textarea>
+        </ion-item>
+      </section>
+      
+      <section id="social-buttons">
+        <ion-button (click)="show()">Add Social Network Links</ion-button>
+        <ion-label><ion-text color="danger">*</ion-text>
+          Optional</ion-label>
+      </section>
+
+      <section id="social-links">
+        <ion-item>
+          <ion-icon id="twitter" name="logo-twitter"></ion-icon>
+          <div id="links">
+            <ion-label position="floating">Twitter URL</ion-label>
+            <ion-input type="text" placeholder="https://twitter.com/" name="twitter" formControlName="twitter"></ion-input>
+          </div>
+        </ion-item>
+        <ion-item>
+          <ion-icon id="facebook" name="logo-facebook"></ion-icon>
+          <div id="links">
+            <ion-label position="floating">Facebook URL</ion-label>
+            <ion-input type="text" placeholder="https://facebook.com/" name="facebook" formControlName="facebook"></ion-input>
+          </div>
+        </ion-item>
+        <ion-item>
+          <ion-icon id="youtube" name="logo-youtube"></ion-icon>
+          <div id="links">
+            <ion-label position="floating">Youtube URL</ion-label>
+            <ion-input type="text" placeholder="https://youtube.com/channel/" name="youtube" formControlName="youtube"></ion-input>
+          </div>
+        </ion-item>
+        <ion-item>
+          <ion-icon id="linkedin" name="logo-linkedin"></ion-icon>
+          <div id="links">
+            <ion-label position="floating">Linkedin URL</ion-label>
+            <ion-input type="text" placeholder="https://linkedin.com/in/" name="linkedin" formControlName="linkedin"></ion-input>
+          </div>
+        </ion-item>
+        <ion-item>
+          <ion-icon id="instagram" name="logo-instagram"></ion-icon>
+          <div id="links">
+            <ion-label position="floating">Instagram URL</ion-label>
+            <ion-input type="text" placeholder="https://instagram.com/" name="instagram" formControlName="instagram"></ion-input>
+          </div>
+        </ion-item>
+      </section>
+      <section id="submit">
+        <ion-button (click)="onSubmit()">Submit</ion-button>
+      </section>
+    </div>
+  </div>
+</ion-content>

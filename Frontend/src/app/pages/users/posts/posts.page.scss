@@ -1,0 +1,251 @@
+ion-item{
+  --highlight-color-focused:none;
+  --highlight-height: 0;
+}
+
+ion-content{
+  position: relative;
+}
+
+.loading{
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 48%;
+  translate: (-50%, -50%);
+}
+
+.container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+
+  .section{
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    header{
+      width: 100%;
+      padding: 0 0.5rem;
+
+      h1{
+        display: flex;
+        align-items: center;
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        ion-icon{
+          margin-right: 1rem;
+        }
+      }
+      p{
+        margin: 0.5rem 0;
+        font-size: 1.5rem;
+      }
+      ion-button{
+        margin: 1rem 0;
+        --background: #01497c;
+      }
+    }
+
+    #cards{
+      ion-card{
+        margin: 1.5rem 0;
+        ion-card-content{
+          display: grid;
+          grid-template-columns: 1fr 4fr;
+
+          #user{
+            display: grid;
+            align-items: center;
+            img{
+              justify-self: center;
+              border-radius: 50%;
+              width: 80%;
+              padding: 0.5rem 0 1rem 0;
+            }
+            h1{
+              text-align: center;
+              font-size: 1.5rem;
+              color: #000;
+            }
+          }
+
+          #comment{
+            display: grid;
+            align-items: center;
+            padding: 0.3rem 0.5rem;
+            h4{
+              font-size: 1.1rem;
+            }
+            p{
+              margin-bottom: 0;
+            }
+            #buttons{
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: center;
+
+              ion-button{
+                margin: 0 0.4rem;
+              }
+
+              #response{
+                --background: #002855;
+                ion-icon{
+                  margin-right: 0.3rem;
+                  font-size: 1.5rem;
+                  color:#ff0a54;
+                }
+              }
+              #discuss{
+                --background:#0b090a;
+                ion-icon{
+                  margin-right: 0.1rem;
+                  color:#fff;
+                }
+                span{
+                  margin-left: 0.3rem;
+                }
+              }
+              #delete{
+                --background:#d90429;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 768px) {
+  .container{    
+    .section{
+      header{
+        h1{
+          display: flex;
+          align-items: center;
+          font-size: 2rem;
+        }
+        p{
+          font-size: 1.3rem;
+        }
+      }
+      
+      #cards{
+        ion-card{
+          margin: 1.5rem 0;
+          ion-card-content{
+            grid-template-columns: repeat(1, 1fr);
+            #user{
+              margin-bottom: 1.3rem;
+              img{
+                width: 30%;
+              }
+              h1{
+                font-size: 1.5rem;
+              }
+            }
+            
+            #comment{
+              padding: 0.3rem 1rem;
+              h4{
+                font-size: 1.1rem;
+                margin: 0.4rem 0;
+                text-align: center;
+              }
+              p{
+                text-align: center;
+                margin: 0.5rem 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 480px) {
+  .loading{
+    left: 43%;
+  }
+  .container{
+    padding: 0.5rem;
+    .section{
+      header{
+        margin-left: 4rem;
+        h1{
+          font-size: 1.5rem;
+          margin-bottom: 1.5rem;
+          ion-icon{
+            margin-right: 0.3rem;
+          }
+        }
+        p{
+          margin: 0.5rem 0;
+          font-size: 1rem;
+        }
+      }
+  
+      #cards{
+        ion-card{
+          margin: 1.5rem 0;
+          ion-card-content{
+            #user{
+              margin-bottom: 1rem;
+              img{
+                width: 40%;
+              }
+              h1{
+                font-size: 1.5rem;
+              }
+            }
+  
+            #comment{
+              margin: 0.3rem;
+              h4{
+                font-size: 1rem;
+              }
+              #buttons{
+                ion-button{
+                  margin: 0 0.2rem;
+                  font-size: 0.8rem;
+                }
+  
+                #response{
+                  --background: #002855;
+                  ion-icon{
+                    margin-right: 0.2rem;
+                    font-size: 1.2rem;
+                    color:#ff0a54;
+                  }
+                }
+                #discuss{
+                  --background:#0b090a;
+                  ion-icon{
+                    margin-right: 0.1rem;
+                    color:#fff;
+                  }
+                  span{
+                    margin-left: 0.3rem;
+                  }
+                }
+                #delete{
+                  --background:#d90429;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }  
+}

@@ -1,0 +1,139 @@
+ion-back-button{
+  --color: #013a63;
+  --background-hover:#01497c;
+  --background-hover-opacity: 0.05;
+}
+
+ion-item{
+  --highlight-color-focused:none;
+  --highlight-height: 0;
+}
+
+ion-content{
+  position: relative;
+}
+
+.loading{
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 48%;
+  translate: (-50%, -50%);
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+
+  .section{
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 1rem;
+
+    header{
+      margin: 1rem 0;
+      h1{
+        font-size: 2.5rem;
+      }
+
+      p{
+        margin-top: 0.5rem;
+        display: flex;
+        align-items: center;
+        ion-icon{
+          font-size: 1.5rem;
+          margin-right: 0.8rem;
+        }
+      }
+    }
+
+    #education-section{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-row-gap: 1rem;
+      grid-column-gap: 1.5rem;
+
+      ion-item{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        ion-label{
+          margin-bottom: 0.5rem;
+        }
+        ion-checkbox{
+          margin-right: 1rem;
+        }
+        ion-datetime{
+          padding: 0;
+        }
+      }
+    }
+
+    #submit{
+      margin-top: 1rem;
+      ion-button{
+        --background: #01497c;
+      }
+    }
+  }
+}
+
+
+@media(max-width: 768px){
+  .container{
+    .section{
+      width: 100%;
+      header{
+        h1{
+          font-size: 2rem;
+        }
+        p{
+          ion-icon{
+            font-size: 1.3rem;
+            margin-right: 0.4rem;
+          }
+        }
+      }
+
+      #education-section{
+        grid-template-columns: repeat(1, 1fr);
+        ion-item{
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 480px){
+  .loading{
+    left: 43%;
+  }
+  .container{
+    padding: 1rem;
+    .section{
+      header{
+        margin-left: 1.5rem;
+        h1{
+          font-size: 1.5rem;
+        }
+        p{
+          font-size: 1rem;
+          margin-right: 0.5rem;
+          ion-icon{
+            font-size: 1.5rem;
+            margin-right: 0.8rem;
+          }
+        }
+      }
+
+      #submit{
+        margin-top: 1rem;
+      }
+    }
+  }
+}

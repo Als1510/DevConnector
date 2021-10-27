@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="developers" text="Back"
+      icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="loading" *ngIf="!dataLoaded">
+    <img src="../../../../assets/output-onlinegiftools.gif">
+  </div>
+  <div class="container" *ngIf="dataLoaded">
+    <div class="section">
+      <div id="logo-links">
+        <img [src]="profile.user.avatar" *ngIf="profile.user.avatar" alt="">
+        <h1 *ngIf="profile.user.name">{{profile.user.name}}</h1>
+        <h2>{{profile.status}}</h2>
+        <p *ngIf="profile.location">{{profile.location}}</p>
+        <div id="links" *ngIf="profile.social">
+          <a [href]="profile.website" *ngIf="profile.website"  target="_blank">
+            <ion-icon name="earth-outline"></ion-icon>
+          </a>
+          <a *ngIf="profile.social.instagram" [href]="profile.social.instagram" target="_blank">
+            <ion-icon name="logo-instagram"></ion-icon>
+          </a>
+          <a [href]="profile.social.twitter" *ngIf="profile.social.twitter"  target="_blank">
+            <ion-icon name="logo-twitter"></ion-icon>
+          </a>
+          <a [href]="profile.social.linkedin" *ngIf="profile.social.linkedin" target="_blank">
+            <ion-icon name="logo-linkedin"></ion-icon>
+          </a>
+          <a [href]="profile.social.youtube" *ngIf="profile.social.youtube" target="_blank">
+            <ion-icon name="logo-youtube"></ion-icon>
+          </a>
+          <a [href]="profile.social.facebook" *ngIf="profile.social.facebook" target="_blank">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </a>
+        </div>
+      </div>
+
+
+      <ion-card id="bio-skills">
+        <ion-card-content id="bio" *ngIf="profile.bio">
+          <h1>{{profile.user.name}}'s Bio</h1>
+          <p>{{profile.bio}}</p>
+        </ion-card-content>
+
+        <p class="seperator" *ngIf="profile.bio"></p>
+
+        <ion-card-content id="skills" *ngIf="profile.skills.length>0">
+          <h1>Skill Set</h1>
+          <div id="skill">
+            <div *ngFor="let skill of profile.skills">
+              <ion-icon></ion-icon>
+              <p>{{skill}}</p>
+            </div>
+          </div>
+
+        </ion-card-content>
+      </ion-card>
+
+      <div id="experience-education">
+        <ion-card id="experience" *ngIf="profile.experience.length>0">
+          <ion-card-header>
+            Experience
+          </ion-card-header>
+          <ion-card-content *ngFor="let exp of profile.experience">
+            <div class="experience-education-item-header">
+              <h1>{{exp.company}}</h1>
+              <p>{{exp.year}}</p>
+            </div>
+
+            <div class="experience-education-item-desc">
+              <p><span>Position:</span>{{exp.title}}</p>
+            </div>
+            
+            <div class="experience-education-item-desc">
+              <p><span>Description:</span>{{exp.description}}</p>
+            </div>
+            <p class="seperator"></p>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card id="education" *ngIf="profile.education.length>0">
+          <ion-card-header>
+            Education 
+          </ion-card-header>
+          <ion-card-content *ngFor="let edu of profile.education">
+            <div class="experience-education-item-header">
+              <h1>{{edu.school}}</h1>
+              <p>{{edu.year}}</p>
+            </div>
+
+            <div class="experience-education-item-desc">
+              <p><span>Degree:</span>{{edu.degree}}</p>
+            </div>
+
+            <div class="experience-education-item-desc">
+              <p><span>Field Of Study:</span>{{edu.fieldofstudy}}</p>
+            </div>
+
+            <div class="experience-education-item-desc">
+              <p><span>Description: </span>{{edu.description}}</p>
+            </div>
+            <p class="seperator"></p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <div id="github-name" *ngIf="profile.githubusername">
+        <ion-icon></ion-icon>
+        <h1 *ngIf="githubRepo">Github Repos</h1>
+      </div>
+
+      <ion-card id="github-repos" *ngFor="let repo of githubRepo">
+        <ion-card-content >
+          <div id="repo-desc">
+            <a [href]="repo.html_url">{{repo.name}}</a>
+            <p>{{repo.description}}</p>
+          </div>
+          <div id="repo-status">
+            <ion-button>Stars: <span>{{repo.stargazers_count}}</span></ion-button>
+            <ion-button>Watchers: <span>{{repo.watchers_count}}</span></ion-button>
+            <ion-button>Forks: <span>{{repo.forks_count}}</span></ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

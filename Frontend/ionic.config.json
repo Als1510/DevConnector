@@ -1,0 +1,7 @@
+{
+  "name": "DevConnector",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

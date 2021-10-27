@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Recursive:wght@700&family=Signika:wght@500;600&display=swap');
+
+
+#logout{
+  --background: #01497c;
+  margin-right: 0.5rem;
+  ion-icon{
+    font-size: 1.3rem;
+  }
+}
+
+.container{
+  position: relative;
+  width: 100%;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h1{
+    font-size: 3rem;
+    font-weight: 1000;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    color: #012a4a;
+    font-family: 'Recursive', sans-serif;
+  }
+
+  #profile-message{
+    position: absolute;
+    right: 2%;
+    top: 3%;
+    ion-progress-bar{
+      margin-top: 0.5rem;
+      padding: 0.2rem;
+      border-radius: 5px;
+    }
+  }
+
+  .content-button{
+    display: flex;
+    flex-direction: row;
+    margin: 2rem;
+
+    ion-button{
+      --background: #01497c;
+
+      a{
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .card{
+    width: 90%;
+    align-self: center;
+    display: grid;
+
+    ion-card{
+      padding: 0.5rem; 
+      
+      ion-card-title{
+        font-size: 1.3rem;
+        margin: 1rem;
+        font-weight: 700;
+      }
+      
+      ion-card-content{
+        display: grid;
+        grid-gap: 0.5rem;
+        
+        .header{
+          display: grid;
+          color: #fff;
+          text-align: center;
+          background: #1d2d44;
+          font-size: 1.1rem;
+          border-radius: 10px;
+          font-weight: 500;
+          grid-template-columns: 1fr 1fr 1.5fr;
+          padding: 0 3rem 0 1rem;
+          align-items: center;
+          justify-content: space-between;
+        }
+        
+        .content{
+          position: relative;
+          display: grid;
+          color: #fff;
+          text-align: center;
+          background: #748cab;
+          font-size: 1.1rem;
+          border-radius: 10px;
+          grid-template-columns: 1fr 1fr 1.5fr;
+          padding: 0 3rem 0 1rem;
+          align-items: center;
+          justify-content: space-between;
+          
+          ion-icon{
+            position: absolute;
+            right: 15px;
+            color: #fff;
+          }
+        }
+      }
+    }
+    
+    #delete{
+      width: fit-content;
+      margin: 1rem 0 1rem 0.8rem;
+      
+       ion-icon{
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+@media(max-width: 768px) { 
+  .container{
+    h1{
+      font-size: 2.5rem;
+      margin-left: 1rem;
+    }
+
+    .content-button{
+      display: flex;
+      margin: 1rem;
+  
+      ion-button{
+        a{
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+    .card{
+      width: 95%;
+      padding: 0.3rem; 
+      
+      ion-card{
+        
+        ion-card-title{
+          font-size: 1.3rem;
+          margin: 0.5rem;
+        }
+        
+        ion-card-content{
+          grid-gap: 0.4rem;
+          padding: 0.5rem;
+
+          .header{
+            font-size: 1rem;
+            font-weight: 400;
+            grid-template-columns: 1fr 1fr 1.5fr;
+            padding: 0.3rem 1.7rem 0 0.5rem;
+          }
+          
+          .content{
+            font-size: 1rem;
+            grid-template-columns: 1fr 1fr 1.5fr;
+            padding: 0.3rem 1.7rem 0 0.5rem;
+          }
+        }
+      }
+      #delete{
+        margin-left: 0.7rem;
+        margin-top: 1rem;
+        
+         ion-icon{
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 480px) { 
+  .container{
+    align-items: center;
+    h1{
+      font-size: 2rem;
+      margin-left: 1rem;
+    }
+
+    #profile-message{
+      position: relative;
+      width: 90%;
+    }
+    
+    .content-button{
+      display: flex;
+      flex-direction: column;
+      margin: 1rem;
+  
+      ion-button{
+        width: fit-content;
+        align-self: center;
+        a{
+          font-size: 0.7rem;
+        }
+      }
+    }
+
+    .card{
+      width: 97%;
+
+      ion-card{
+        padding: 0.3rem; 
+
+        ion-card-title{
+          font-size: 1rem;
+          margin: 0.5rem;
+        }
+        
+        ion-card-content{
+          grid-gap: 0.4rem;
+          padding: 0.3rem;
+          
+          .header{
+            font-size: 0.9rem;
+            font-weight: 550;
+            grid-gap: 0.2rem;
+            grid-template-columns: 1fr 1fr;
+            padding: 0.2rem 1.7rem 0 0.5rem;
+            .year {
+              display: none;
+            }
+          }
+          
+          .content{
+            font-size: 0.9rem;
+            grid-gap: 0.2rem;
+            grid-template-columns: 1fr 1fr;
+            padding: 0.2rem 1.7rem 0 0.5rem;
+            
+            .year {
+              display: none;
+            }
+
+            ion-icon{
+              font-size: 0.9rem;
+            }
+          }
+        }
+      }
+
+      #delete{
+        margin-left: 0.8rem;
+        margin-top: 1rem;
+        justify-self: center;
+
+        P{
+          font-size: 0.8rem;
+        }
+        
+         ion-icon{
+          margin-right: 0.5rem;
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}

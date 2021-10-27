@@ -1,0 +1,254 @@
+ion-item{
+  --highlight-color-focused:none;
+  --highlight-height: 0;
+}
+
+ion-back-button{
+  --color: #013a63;
+  --background-hover:#01497c;
+  --background-hover-opacity: 0.05;
+}
+
+ion-content{
+  position: relative;
+}
+
+.loading{
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 48%;
+  translate: (-50%, -50%);
+}
+
+.container{
+  z-index: 3 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+
+  .section{
+    z-index: 4 !important;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 1rem;
+
+    header{
+      margin: 1rem 0;
+      h1{
+        font-size: 2.5rem;
+      }
+
+      p{
+        margin-top: 0.5rem;
+        display: flex;
+        align-items: center;
+        ion-icon{
+          font-size: 1.5rem;
+          margin-right: 0.8rem;
+        }
+      }
+    }
+
+    #profile-section{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-row-gap: 1rem;
+      grid-column-gap: 1.5rem;
+
+      ion-item{
+        display: flex;
+        flex-direction: column;
+        ion-label{
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+
+    #social-buttons{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      ion-button{
+        --background: #01497c;
+      }
+      ion-label{
+        margin-left: 0.5rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    #social-links{
+      ion-item{
+        #twitter{
+          color:#00acee;
+        }
+        #facebook{
+          color: #3b5998;
+        }
+        #youtube{
+          color: #c4302b;
+        }
+        #linkedin{
+          color: #0e76a8;
+        }
+        #instagram{
+          color: #8a3ab9;
+        }
+        display: flex;
+        position: relative;
+        ion-icon{
+          position: absolute;
+          left: 0%;
+          top: 30%;
+        }
+        #links{
+          width: 100%;
+          margin-left: 2.3rem;
+        }
+      }
+    }
+
+    #submit{
+      margin-top: 1rem;
+      ion-button{
+        --background: #01497c;
+      }
+    }
+  }
+}
+
+@media(max-width: 1000px){
+  .container{
+    .section{
+      header{
+        h1{
+          font-size: 2.5rem;
+        }
+        p{
+          ion-icon{
+            font-size: 1.5rem;
+            margin-right: 0.8rem;
+          }
+        }
+      }
+
+      #profile-section{
+        grid-template-columns: repeat(1, 1fr);
+        ion-item{
+          ion-label{
+            margin-bottom: 0.5rem;
+          }
+        }
+      }
+
+      #social-buttons{
+        ion-label{
+          margin-left: 0.5rem;
+          font-size: 0.8rem;
+        }
+      }
+
+      #social-links{
+        ion-item{
+          ion-icon{
+            left: 0%;
+            top: 30%;
+          }
+          #links{
+            margin-left: 2.3rem;
+          }
+        }
+      }
+
+      #submit{
+        margin-top: 1rem;
+      }
+    }
+  }
+}
+
+@media(max-width: 768px){
+  .container{
+    .section{
+      header{
+        h1{
+          font-size: 2rem;
+        }
+        p{
+          ion-icon{
+            font-size: 1.3rem;
+            margin-right: 0.4rem;
+          }
+        }
+      }
+
+      #social-buttons{
+        ion-label{
+          margin-left: 0.5rem;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 480px){
+  .loading{
+    top: 46%;
+    left: 43%;
+  }
+  .container{
+    padding: 0.5rem;
+    .section{
+      header{
+        margin-left: 1.5rem;
+        h1{
+          font-size: 1.5rem;
+        }
+        p{
+          font-size: 1rem;
+          margin-right: 0.5rem;
+          ion-icon{
+            font-size: 1.5rem;
+            margin-right: 0.8rem;
+          }
+        }
+      }
+
+      #profile-section{
+        grid-template-columns: repeat(1, 1fr);
+        ion-item{
+          padding: 0;
+        }
+      }
+
+      #social-buttons{
+        ion-label{
+          margin-left: 0.5rem;
+          font-size: 0.8rem;
+        }
+      }
+
+      #social-links{
+        ion-item{
+          ion-icon{
+            left: 0%;
+            top: 30%;
+          }
+          #links{
+            margin-left: 2.3rem;
+          }
+        }
+      }
+
+      #submit{
+        margin-top: 1rem;
+      }
+    }
+  }
+}

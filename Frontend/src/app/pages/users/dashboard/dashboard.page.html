@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>DevConnector</ion-title>
+    <ion-button id="logout" slot="end" (click)="logout()" routerLink="/login">
+      <ion-icon name="log-out"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <h1>
+      Welcome, {{username}}
+    </h1>
+
+    <div class="content-button">
+      <ion-button>
+        <a routerLink="/create-profile">Edit Profile</a>
+      </ion-button>
+      <ion-button>
+        <a routerLink="/experience">Add Experience</a>
+      </ion-button>
+      <ion-button>
+        <a routerLink="/education">Add Education</a>
+      </ion-button>
+    </div>
+
+    <div id="profile-message">
+      <ion-card>
+        <ion-card-content>
+          <h2>Complete Your Profile</h2>
+          <ion-progress-bar [value]="profileValue"></ion-progress-bar>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="card">
+      <ion-card *ngIf="experienceCredentials.length > 0">
+        <ion-card-title>Experience Credentials</ion-card-title>
+
+        <ion-card-content>
+          <ion-list class="header">
+            <ion-label>Company</ion-label>
+            <ion-label>Title</ion-label>
+            <ion-label class="year">Years</ion-label>
+          </ion-list>
+          
+          <ion-list class="content" *ngFor="let experience of experienceCredentials">
+            <ion-label>{{experience.company}}</ion-label>
+            <ion-label>{{experience.title}}</ion-label>
+            <ion-label class="year">{{experience.year}}</ion-label>
+            <ion-icon name="trash-outline" (click)="deleteExperience(experience._id)"></ion-icon>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="educationCredentials.length > 0">
+        <ion-card-title>Education Credentials</ion-card-title>
+        
+        <ion-card-content>
+          <ion-list class="header">
+            <ion-label>School</ion-label>
+            <ion-label>Degree</ion-label>
+            <ion-label class="year">Years</ion-label>
+          </ion-list>
+
+          <ion-list class="content" *ngFor="let education of educationCredentials">
+            <ion-label>{{education.school}}</ion-label>
+            <ion-label>{{education.degree}}</ion-label>
+            <ion-label class="year">{{education.year}}</ion-label>
+            <ion-icon name="trash-outline" (click)="deleteEducation(education._id)"></ion-icon>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+      
+      <ion-button color="danger" id="delete" (click)="deleteAccount()">
+        <ion-icon name="person"></ion-icon>
+        <p>Delete My Account</p>
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

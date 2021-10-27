@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Posts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="loading" *ngIf="loading">
+    <img src="../../../../assets/output-onlinegiftools.gif">
+  </div>
+  <div class="container" *ngIf="!loading">
+    <div class="section">
+      <header>
+        <h1><ion-icon name="people-outline"></ion-icon>Welcome to the community!</h1>
+        <p>Say Something....</p>
+        <ion-item [formGroup]="postsForm">
+          <ion-textarea placeholder="Create a post" name="text" formControlName="text"></ion-textarea>
+        </ion-item>
+        <ion-button (click)="onSubmit()">Submit</ion-button>
+      </header>
+
+      <section id="cards">
+        <ion-card *ngFor="let post of posts">
+          <ion-card-content>
+            <div id="user">
+              <img [src]="post.avatar">
+              <h1>{{post.name}}</h1>
+            </div>
+            <div id="comment">
+              <h4>{{post.text}}</h4>
+              <p>Posted on {{post.date}}</p>
+              <div id="buttons">
+                <ion-button id="response" (click)="likePost(post._id)"><ion-icon name="heart"></ion-icon>{{post.likes.length}}</ion-button>
+                <ion-button id="response" (click)="unlikePost(post._id)"><ion-icon name="heart-dislike"></ion-icon></ion-button>
+                <ion-button id="discuss" (click)="openPost(post._id)"><ion-icon name="chatbubbles"></ion-icon>Discussion <span>{{post.comments.length}}</span></ion-button>
+                <ion-button id="delete" *ngIf="user_id === post.user" (click)="deletePost(post._id)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </section>
+    </div>
+  </div>
+</ion-content>
