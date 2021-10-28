@@ -17,7 +17,7 @@ app.use(function(req, res, next) {
 });
  
 app.use(express.static('www'));
-app.set('port',4000);
+app.set('port',8100);
 app.listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
