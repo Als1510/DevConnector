@@ -12,10 +12,10 @@ import { SplashScreen } from '@capacitor/splash-screen';
 
 export class AppComponent implements OnInit {
   constructor(
-    private _tokenService : TokenstorageService,
-    private _router : Router
-    ) {}
-    
+    private _tokenService: TokenstorageService,
+    private _router: Router
+  ) { }
+
   async ngOnInit() {
     await SplashScreen.hide();
     // if(this._tokenService.getToken() != '') {

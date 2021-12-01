@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { AlertController } from '@ionic/angular';
@@ -9,7 +9,7 @@ import { TokenstorageService } from 'src/app/services/tokenstorage.service';
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage implements OnInit{
 
   educationCredentials = []
   experienceCredentials = []
@@ -22,16 +22,15 @@ export class DashboardPage implements OnInit {
     private _alertController: AlertController,
     private _tokenService: TokenstorageService
   ) { }
-
+  
   ngOnInit() {
-    this.getProfile()
     this.username = this._tokenService.getName();
-    setInterval(() => {
-      this.getProfile();
-    }, 7000)
   }
 
-
+  ionViewWillEnter(){
+    this.getProfile();
+  }
+  
   calculateProfile(profile) {
     this.profileValue = 0;
     if (profile['status']) {
