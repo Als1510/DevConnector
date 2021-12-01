@@ -39,23 +39,22 @@ router.post('/', [
 
   try {
     let user = await User.findOne({ email });
-
+    
     if(!user) {
       return res.status(400).json({ errors: [{ msg: 'Email id does not exists. Please create a new account.' }] })
     }
-
+    
     let previousRecord = await OtpToken.findOne({ email });
     if(previousRecord) {
       let currTime = new Date().getTime();
       let diff = previousRecord.expiresIn - currTime;
       if(diff > 0) {
-        return res.json({ msg: "OTP has been sent to your registered e-mail id"});
+        return res.json({ msg: "Otp has been sent to your registered e-mail id", name: user.name});
       } else {
         await OtpToken.deleteOne({ email });
       }
     }
-
-
+    
     let otpCode = Math.floor((Math.random() * 1000000) + 1);
 
     let otpData = new OtpToken({
