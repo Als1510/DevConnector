@@ -4,7 +4,7 @@ const cors = require('cors');
 const app = express();
 
 const corsOptions = {
-  origin: ["http://localhost:8100",  "http://localhost"]
+  origin: ["http://localhost:8100",  "http://localhost", "https://devconnectors.netlify.app"]
 };
 
 app.use(cors(corsOptions));
