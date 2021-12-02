@@ -63,7 +63,7 @@ router.post('/', [
       expiresIn: new Date().getTime() + 300*1000
     });
 
-    // await otpData.save();
+    await otpData.save();
 
     let transporter = nodemailer.createTransport({
       service: "Gmail",
