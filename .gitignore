@@ -3,7 +3,7 @@ frontend/ionic
 frontend/sass-cache
 frontend/sourcemaps
 frontend/versions
-frontend/dist
+frontend/www
 frontend/node_modules/
 frontend/platforms
 frontend/plugins

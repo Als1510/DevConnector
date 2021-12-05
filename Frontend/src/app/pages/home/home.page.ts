@@ -7,16 +7,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
   constructor(
-    private _router : Router
+    private _router : Router,
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
   }
-
+  
   login() {
     this._router.navigate(['login']);
   }
-
 }

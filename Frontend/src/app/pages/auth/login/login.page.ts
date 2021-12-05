@@ -11,7 +11,7 @@ import { TokenstorageService } from 'src/app/services/tokenstorage.service';
 })
 
 export class LoginPage implements OnInit {
-  
+
   loginForm: FormGroup;
   loading = false;
   hide = false;
@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.loginForm = this._formBuilder.group({
-      email: ["",  Validators.required],
+      email: ["", Validators.required],
       password: ["", Validators.required]
     });
   }
@@ -42,15 +42,15 @@ export class LoginPage implements OnInit {
       async data => {
         await this._tokenService.saveUserNameAndId(data['name'], data['id'])
         await this._tokenService.setToken(data['token']);
-        setTimeout(()=>{
+        setTimeout(() => {
           this._router.navigate(['dashboard']);
         }, 1500)
         this.loading = false;
       }
     )
-    this.loginForm.reset();
-    setTimeout(()=> {
+    setTimeout(() => {
       this.loading = false;
+      this.loginForm.reset();
     }, 7000)
   }
 }
