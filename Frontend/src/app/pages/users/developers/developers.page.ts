@@ -16,21 +16,19 @@ export class DevelopersPage implements OnInit {
   constructor(
     private _router : Router,
     private _userService : UserService,
-    private _loaderService: LoaderService
-  ) { 
-    this._loaderService.loading.subscribe((val)=>{
-      this.loading = val;
-    })
-  }
+  ) { }
 
   ngOnInit() {
+    this.loading = false;
     this.getAllProfiles();
   }
-
+  
   getAllProfiles() {
+    this.loading = true;
     this._userService.getAllProfile().subscribe(
       data => {
         this.profiles = data
+        this.loading = false;
       }
     )
   }

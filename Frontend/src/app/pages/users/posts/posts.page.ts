@@ -22,14 +22,10 @@ export class PostsPage implements OnInit {
     private _userService: UserService,
     private _formBuilder: FormBuilder,
     private _tokenService : TokenstorageService,
-    private _loaderService: LoaderService
-  ) {
-    this._loaderService.loading.subscribe((val)=>{
-      this.loading = val;
-    })
-   }
+  ) { }
 
   ngOnInit() {
+    this.loading = false;
     this.user_id = this._tokenService.getId();
     this.postsForm = this._formBuilder.group({
       text: ["", Validators.required]
@@ -38,6 +34,7 @@ export class PostsPage implements OnInit {
   }
 
   getAllPosts() {
+    this.loading = true;
     this._userService.getAllPosts().subscribe(
       data => {
         this.posts = data;
@@ -45,6 +42,7 @@ export class PostsPage implements OnInit {
           let date = this.reverseString(element.date.split('T')[0]);
           element['date'] = date;
         })
+        this.loading = false;
       }
     )
   }
@@ -55,25 +53,31 @@ export class PostsPage implements OnInit {
 
   
   onSubmit() {
+    this.loading = true;
     this._userService.createPost(this.postsForm.get('text').value).subscribe(
       async data => {
         await this.getAllPosts();
         this.postsForm.reset();
+        this.loading = false;
       }
-    )
-  }
+      )
+    }
     
-  deletePost(val) {
+    deletePost(val) {
+    this.loading = true;
     this._userService.deletePostById(val).subscribe(
       data => {
         this.getAllPosts();
+        this.loading = false;
       }
     )
   }
       
   likePost(val) {
+    this.loading = true;
     this._userService.likePostBydId(val).subscribe(
       data => {
+        this.loading = false;
         this.getAllPosts();
       }
     )

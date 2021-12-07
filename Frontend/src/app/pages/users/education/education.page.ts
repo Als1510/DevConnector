@@ -21,14 +21,10 @@ export class EducationPage implements OnInit {
     private _formBuilder : FormBuilder,
     private _userService : UserService,
     private _alertService : AlertService,
-    private _loaderService: LoaderService
-  ) {
-    this._loaderService.loading.subscribe((val)=>{
-      this.loading = val;
-    })
-  }
+  ) { }
 
   ngOnInit() {
+    this.loading = false;
     this.educationForm = this._formBuilder.group({
       school: ["", Validators.required],
       degree: ["", Validators.required],
@@ -60,12 +56,14 @@ export class EducationPage implements OnInit {
     if(start > end) {  
       return this._alertService.presentToast("Selected Date is not valid", "danger");
     }
+    this.loading = true;
 
     this._userService.addUpdateEducation(school, degree, fieldofstudy, from, to, current, description).subscribe(
       data => {
         this._alertService.presentToast(data['msg'], 'success');
         this.educationForm.reset();
         this._router.navigate(['dashboard']);
+        this.loading = false;
       }
     )
   }

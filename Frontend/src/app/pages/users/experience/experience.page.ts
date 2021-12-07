@@ -21,14 +21,10 @@ export class ExperiencePage implements OnInit {
     private _formBuilder: FormBuilder,
     private _userService: UserService,
     private _alertService: AlertService,
-    private _loaderService: LoaderService
-  ) {
-    this._loaderService.loading.subscribe((val) => {
-      this.loading = val;
-    })
-  }
+  ) { }
 
   ngOnInit() {
+    this.loading = false;
     this.experienceForm = this._formBuilder.group({
       title: ["", Validators.required],
       company: ["", Validators.required],
@@ -53,19 +49,21 @@ export class ExperiencePage implements OnInit {
     let to = this.experienceForm.get('to').value;
     let current = this.experienceForm.get('current').value
     let description = this.experienceForm.get('description').value;
-
+    
     let start = new Date(from);
     let end = new Date(to);
-
+    
     if (start > end) {
       return this._alertService.presentToast("Selected Date is not valid", "danger");
     }
-
+    
+    this.loading = true;
     this._userService.addUpdateExperience(title, company, location, from, to, current, description).subscribe(
       data => {
         this._alertService.presentToast(data['msg'], 'success');
         this.experienceForm.reset();
         this._router.navigate(['dashboard']);
+        this.loading = false;
       }
     )
   }
