@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { LoaderService } from 'src/app/services/loader.service';
 import { TokenstorageService } from 'src/app/services/tokenstorage.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -21,11 +22,15 @@ export class PostPage implements OnInit {
     private _activatedRoute : ActivatedRoute,
     private _userService : UserService,
     private _formBuilder : FormBuilder,
-    private _tokenService : TokenstorageService
-  ) { }
+    private _tokenService : TokenstorageService,
+    private _loaderService: LoaderService
+  ) { 
+    this._loaderService.loading.subscribe((val)=>{
+      this.loading = val;
+    })
+  }
 
   ngOnInit() {
-    this.loading = true;
     this.user_id = this._tokenService.getId();
     this.post_id = this._activatedRoute.snapshot.params['post_id'];
     this.postForm = this._formBuilder.group({
@@ -44,7 +49,6 @@ export class PostPage implements OnInit {
           let Commenteddate = this.reverseString(element.date.split('T')[0]);
           element['date'] = Commenteddate;
         })
-        this.loading = false;
       }
     )
   }
@@ -58,7 +62,6 @@ export class PostPage implements OnInit {
   }
 
   onSubmit() {
-    this.loading = true;
     this._userService.commentById(this.post_id, this.postForm.get('text').value).subscribe(
       data=> {
         this.getPost();

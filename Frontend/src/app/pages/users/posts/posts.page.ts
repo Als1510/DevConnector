@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/services/loader.service';
 import { TokenstorageService } from 'src/app/services/tokenstorage.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -20,11 +21,15 @@ export class PostsPage implements OnInit {
     private _router: Router,
     private _userService: UserService,
     private _formBuilder: FormBuilder,
-    private _tokenService : TokenstorageService
-  ) { }
+    private _tokenService : TokenstorageService,
+    private _loaderService: LoaderService
+  ) {
+    this._loaderService.loading.subscribe((val)=>{
+      this.loading = val;
+    })
+   }
 
   ngOnInit() {
-    this.loading = true;
     this.user_id = this._tokenService.getId();
     this.postsForm = this._formBuilder.group({
       text: ["", Validators.required]
@@ -40,7 +45,6 @@ export class PostsPage implements OnInit {
           let date = this.reverseString(element.date.split('T')[0]);
           element['date'] = date;
         })
-        this.loading = false;
       }
     )
   }
@@ -51,7 +55,6 @@ export class PostsPage implements OnInit {
 
   
   onSubmit() {
-    this.loading = true;
     this._userService.createPost(this.postsForm.get('text').value).subscribe(
       async data => {
         await this.getAllPosts();
@@ -61,7 +64,6 @@ export class PostsPage implements OnInit {
   }
     
   deletePost(val) {
-    this.loading = true;
     this._userService.deletePostById(val).subscribe(
       data => {
         this.getAllPosts();

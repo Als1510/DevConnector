@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenstorageService } from 'src/app/services/tokenstorage.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
+import { AppComponent } from 'src/app/app.component';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-register',
@@ -21,8 +23,15 @@ export class RegisterPage implements OnInit {
     private _router: Router,
     private _authService: AuthService,
     private _tokenService: TokenstorageService,
-    private _alertController : AlertController
-  ) { }
+    private _alertController: AlertController,
+    private _platform: Platform,
+    private _appComponent: AppComponent,
+    private _loaderService: LoaderService
+  ) {
+    this._loaderService.loading.subscribe((val)=>{
+      this.loading = val;
+    })
+  }
 
   ngOnInit() {
     this.registerForm = this._formBuilder.group({
@@ -43,28 +52,29 @@ export class RegisterPage implements OnInit {
     });
     await alert.present();
 
-    setTimeout(()=>{
+    setTimeout(() => {
       alert.dismiss();
     }, 3000)
   }
 
 
-  onSubmit() {
-    let name = this.registerForm.get('name').value;
-    let email = this.registerForm.get('email').value.toLowerCase();
-    let password = this.registerForm.get('password').value;
-    this.loading = true;
-    this._authService.register(name, email, password).subscribe(
-      async data => {
-        this.presentAlert(data['msg'], data['name'])
-        await this._tokenService.setToken(data['token']);
-        await this._router.navigate(['login']);
-        this.loading = false;
-      }
-    )
-    setTimeout(()=> {
-      this.loading = false;
-    }, 7000)
-    this.registerForm.reset();
+  async onSubmit() {
+    if((await this._appComponent.checkConnection()) && (this._platform.is('android'))) {
+      this._appComponent.openAlert()
+    } else {
+      let name = this.registerForm.get('name').value;
+      let email = this.registerForm.get('email').value.toLowerCase();
+      let password = this.registerForm.get('password').value;
+      this._authService.register(name, email, password).subscribe(
+        async data => {
+          this.presentAlert(data['msg'], data['name'])
+          await this._tokenService.setToken(data['token']);
+          await this._router.navigate(['login']);
+        }
+      )
+      setTimeout(()=>{
+        this.registerForm.reset();
+      }, 7000);
+    }
   }
 }

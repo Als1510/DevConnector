@@ -23,12 +23,14 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     await SplashScreen.hide();
-    this.status = await Network.getStatus();
-    if(this._platform.is('android')){
-      if(!this.status.connected) {
-        this.openAlert()
-      }
+    if((await this.checkConnection()) && (this._platform.is('android'))) {
+      this.openAlert()
     }
+  }
+  
+  async checkConnection() {
+    this.status = await Network.getStatus();
+    return !this.status.connected;
   }
 
   async openAlert() {

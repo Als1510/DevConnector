@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/services/loader.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -14,22 +15,22 @@ export class DevelopersPage implements OnInit {
 
   constructor(
     private _router : Router,
-    private _userService : UserService
-  ) { }
+    private _userService : UserService,
+    private _loaderService: LoaderService
+  ) { 
+    this._loaderService.loading.subscribe((val)=>{
+      this.loading = val;
+    })
+  }
 
   ngOnInit() {
-    this.loading = true;
     this.getAllProfiles();
-    setTimeout(()=> {
-      this.loading = false;
-    }, 7000)
   }
 
   getAllProfiles() {
     this._userService.getAllProfile().subscribe(
       data => {
         this.profiles = data
-        this.loading = false;
       }
     )
   }

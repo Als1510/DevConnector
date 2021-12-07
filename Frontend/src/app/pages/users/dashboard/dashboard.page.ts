@@ -1,15 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 import { TokenstorageService } from 'src/app/services/tokenstorage.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
-export class DashboardPage implements OnInit{
+export class DashboardPage implements OnInit {
 
   educationCredentials = []
   experienceCredentials = []
@@ -20,17 +21,23 @@ export class DashboardPage implements OnInit{
     private _userService: UserService,
     private _router: Router,
     private _alertController: AlertController,
-    private _tokenService: TokenstorageService
+    private _tokenService: TokenstorageService,
+    private _appComponent: AppComponent,
+    private _platform: Platform
   ) { }
-  
+
   ngOnInit() {
     this.username = this._tokenService.getName();
   }
 
-  ionViewWillEnter(){
-    this.getProfile();
+  async ionViewWillEnter() {
+    if((await this._appComponent.checkConnection()) && (this._platform.is('android'))) {
+      this._appComponent.openAlert()
+    } else {
+      this.getProfile();
+    }
   }
-  
+
   calculateProfile(profile) {
     this.profileValue = 0;
     if (profile['status']) {
@@ -110,7 +117,7 @@ export class DashboardPage implements OnInit{
               data => {
                 this.presentAlert(data['msg'], data['name']);
                 this._tokenService.logout();
-              } 
+              }
             );
           }
         }

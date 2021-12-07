@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
+import { LoaderService } from 'src/app/services/loader.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,19 +12,23 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ExperiencePage implements OnInit {
 
-  experienceForm : FormGroup;
+  experienceForm: FormGroup;
   loading;
   check = false;
 
   constructor(
     private _router: Router,
-    private _formBuilder : FormBuilder,
-    private _userService : UserService,
-    private _alertService : AlertService
-  ) { }
+    private _formBuilder: FormBuilder,
+    private _userService: UserService,
+    private _alertService: AlertService,
+    private _loaderService: LoaderService
+  ) {
+    this._loaderService.loading.subscribe((val) => {
+      this.loading = val;
+    })
+  }
 
   ngOnInit() {
-    this.loading = false;
     this.experienceForm = this._formBuilder.group({
       title: ["", Validators.required],
       company: ["", Validators.required],
@@ -41,7 +46,6 @@ export class ExperiencePage implements OnInit {
   }
 
   onSubmit() {
-    this.loading = true;
     let title = this.experienceForm.get('title').value;
     let company = this.experienceForm.get('company').value;
     let location = this.experienceForm.get('location').value;
@@ -49,12 +53,11 @@ export class ExperiencePage implements OnInit {
     let to = this.experienceForm.get('to').value;
     let current = this.experienceForm.get('current').value
     let description = this.experienceForm.get('description').value;
-    
+
     let start = new Date(from);
     let end = new Date(to);
 
-    if(start > end) {  
-      this.loading = false;
+    if (start > end) {
       return this._alertService.presentToast("Selected Date is not valid", "danger");
     }
 
@@ -63,12 +66,7 @@ export class ExperiencePage implements OnInit {
         this._alertService.presentToast(data['msg'], 'success');
         this.experienceForm.reset();
         this._router.navigate(['dashboard']);
-        this.loading = false;
       }
     )
-
-    setTimeout(()=> {
-      this.loading = false;
-    }, 7000)
   }
 }

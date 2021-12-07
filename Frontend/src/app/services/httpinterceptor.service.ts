@@ -8,6 +8,7 @@ import { AlertService } from './alert.service';
 import { Network, NetworkStatus } from '@capacitor/network';
 import { AlertController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
+import { LoaderService } from './loader.service';
 
 const TOKEN_HEADER_KEY = 'x-auth-token';
 
@@ -15,84 +16,50 @@ const TOKEN_HEADER_KEY = 'x-auth-token';
   providedIn: 'root'
 })
 export class HttpinterceptorService {
-  status: NetworkStatus;
   token = '';
 
   constructor(
     public _router: Router,
     private _tokenService: TokenstorageService,
     private _alertService: AlertService,
-    private _alertController: AlertController,
-    private _platform: Platform
+    private _loaderService: LoaderService
   ) { }
 
   getToken() {
     this.token = this._tokenService.getToken();
   }
 
-  async getStatus() {
-    this.status = await Network.getStatus();
-    return this.status.connected;
-  }
-
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
+    this._loaderService.loading.next(true);
     this.getToken();
 
-    if (this.getStatus()) {
+    req = req.clone({
+      headers: req.headers.set(TOKEN_HEADER_KEY, this.token)
+    });
 
-      req = req.clone({
-        headers: req.headers.set(TOKEN_HEADER_KEY, this.token)
-      });
-
-      return next.handle(req).pipe(
-        catchError((error) => {
-          if (error instanceof HttpErrorResponse) {
-            console.log(error)
-            if (Array.isArray(error.error.errors)) {
-              this._alertService.presentToast(error.error.errors[0].msg, 'danger');
-            } else {
-              switch (error.status) {
-                case 401:
-                  this._router.navigate(['login']);
-                  break;
-                case 404:
-                  this._router.navigate(['pagenotfound']);
-                  break;
-                case 500:
-                  this._router.navigate(['servererror']);
-                  break;
-              }
-            }
-          }
-          return EMPTY;
-        })
-      )
-    } else {
-      if(this.openAlert()){
-        return EMPTY;
-      };
-    }
-  }
-
-  async openAlert() {        
-    const alert = await this._alertController.create({
-      header: 'Check Network Connection',
-      message: 'You do not have Internet Connection.',
-      buttons: [
-        {
-          text: 'Ok',
-          handler: () => {
-            if(this._platform.is('android')){
-              navigator['app'].exitApp();
-            } else {
-              this._router.navigate(['home'])
+    return next.handle(req).pipe(
+      catchError((error) => {
+        this._loaderService.loading.next(false);
+        if (error instanceof HttpErrorResponse) {
+          // console.log(error)
+          if (Array.isArray(error.error.errors)) {
+            this._alertService.presentToast(error.error.errors[0].msg, 'danger');
+          } else {
+            switch (error.status) {
+              case 401:
+                this._router.navigate(['login']);
+                break;
+              case 404:
+                this._router.navigate(['pagenotfound']);
+                break;
+              case 500:
+                this._router.navigate(['servererror']);
+                break;
             }
           }
         }
-      ]
-    })
-    await alert.present();
-    return EMPTY;
+        return EMPTY;
+      })
+    )
   }
 }
