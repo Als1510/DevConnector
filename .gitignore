@@ -10,5 +10,4 @@ frontend/plugins
 frontend/android/
 backend/node_modules
 backend/config/default.json
-backend/config/production.json
 AndroidSplash&Icon
