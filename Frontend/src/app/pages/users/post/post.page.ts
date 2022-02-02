@@ -42,7 +42,8 @@ export class PostPage implements OnInit {
   getPost() {
     this._userService.getPostById(this.post_id).subscribe(
       data => {
-        this.post = data
+        this.post = data;
+        this.loading = false;
         let date = this.reverseString(this.post.date.split('T')[0]);
         this.post['date'] = date;
         this.post.comments.forEach(element => {
