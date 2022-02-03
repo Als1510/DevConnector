@@ -1,6 +1,6 @@
 # DevConnector
 
-It is MEAN stack application including ionic framework.
+It is MEAN stack application build using ionic framework.
 
 To connect nearby developers, have a discussion with them and post some useful contents.
 
