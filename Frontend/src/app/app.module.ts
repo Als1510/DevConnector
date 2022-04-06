@@ -13,7 +13,8 @@ import { HttpinterceptorService } from './services/httpinterceptor.service';
   declarations: [AppComponent, ],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule, FormsModule, HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {provide: HTTP_INTERCEPTORS, useClass: HttpinterceptorService, multi: true}
   ],
   bootstrap: [AppComponent],
