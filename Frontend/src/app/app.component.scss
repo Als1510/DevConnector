@@ -11,3 +11,28 @@ ion-label{
 ion-list{
   margin-top: 1rem;
 }
+
+ion-content{
+  height: 100vh;
+  .qrcode{
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img{
+      height: 150px;
+      width: 150px;
+    }
+    span{
+      margin-top: 1rem;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media (max-height: 650px) and (orientation: landscape) {
+  .qrcode{
+    margin: 1.5rem 0;
+  }
+}
